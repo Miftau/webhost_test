@@ -1,665 +1,825 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('Popular');
-  const [expandedFAQ, setExpandedFAQ] = useState(0);
+  const [activeTab, setActiveTab] = useState('Design and development');
+  const [expandedSection, setExpandedSection] = useState(null);
 
-  const domainTypes = [
-    { name: '.Me', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Org', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Com', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Net', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Shop', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Store', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Pro', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Site', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Biz', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-    { name: '.Co', price: '$6.49/yr', originalPrice: '$14.98/yr' },
-  ];
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
 
-  const tldList = [
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-    { tld: '.com', registration: '$10.28', renewal: '$10.48', transfer: '$10.48', idProtection: '$10.28' },
-  ];
+  // Animation variants for sections
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: 'easeOut' }
+    }
+  };
 
-  const faqs = [
-    {
-      question: 'What is Shared Hosting?',
-      answer:
-        'Shared Hosting is a popular hosting option that provides an affordable way to get your website online. Shared Hosting works by allowing multiple users to share space on a single server maintained by the hosting provider. Our Shared Hosting is suitable for blogging, hobbies and small business websites.',
-    },
-    {
-      question: 'What is the difference between Linux and Windows hosting?',
-      answer:
-        'Linux and Windows hosting differ primarily in the operating system they run on. Linux hosting is generally more cost-effective and supports open-source applications like WordPress, while Windows hosting is better suited for .NET applications and Microsoft-based technologies.',
-    },
-    {
-      question: 'If my PC runs Windows, do I have to use Windows Hosting?',
-      answer:
-        'No, you don’t have to use Windows Hosting if your PC runs Windows. Most websites are built using technologies that work across platforms, so you can use Linux hosting regardless of your operating system.',
-    },
-    {
-      question: 'What’s the difference between a domain name and web hosting?',
-      answer:
-        'A domain name is your website’s address (like example.com), while web hosting is the service that stores your website files and makes them accessible on the internet. You need both to have a functioning website.',
-    },
-  ];
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        delay: i * 0.1, 
+        duration: 0.5, 
+        ease: 'easeOut' 
+      }
+    })
+  };
 
-  const toggleFAQ = (index: React.SetStateAction<number>) => {
-    setExpandedFAQ(expandedFAQ === index ? -1 : index);
+  // Animation variants for buttons
+  const buttonVariants = {
+    hover: { 
+      scale: 1.05, 
+      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)', 
+      transition: { duration: 0.3 } 
+    }
+  };
+
+  // Animation variants for expandable sections
+  const expandVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: { 
+      height: 'auto', 
+      opacity: 1, 
+      transition: { duration: 0.3, ease: 'easeInOut' }
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" className="w-full h-full">
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,640L48,624C96,608,192,576,288,560C384,544,480,544,576,544C672,544,768,544,864,544C960,544,1056,544,1152,544C1248,544,1344,544,1392,544L1440,544L1440,800L1392,800C1344,800,1248,800,1152,800C1056,800,960,800,864,800C768,800,672,800,576,800C480,800,384,800,288,800C192,800,96,800,48,800L0,800Z"
-            ></path>
-          </svg>
-        </div>
+    {/* Hero Section */}
+<motion.section
+  className="relative bg-cover bg-center bg-no-repeat text-white py-20"
+  style={{
+    backgroundImage: "url('https://via.placeholder.com/1920x1080/0a1a3f/ffffff?text=Hero+Background')",
+  }}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={sectionVariants}
+>
+  {/* Background Decorative Elements (3D Blocks) */}
+  <div className="absolute inset-0 overflow-hidden">
+    {/* Left Side Blocks */}
+    <div className="absolute top-16 left-10 flex flex-col space-y-6">
+      <div className="w-16 h-16 bg-blue-800 rounded-lg shadow-lg flex items-center justify-center transform rotate-6">
+        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h1" />
+        </svg>
+      </div>
+      <div className="w-16 h-16 bg-blue-800 rounded-lg shadow-lg flex items-center justify-center transform -rotate-6">
+        <span className="text-white font-bold text-lg">MC</span>
+      </div>
+    </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-6">
-          <div className="flex justify-between items-center">
-           
+    {/* Right Side Blocks */}
+    <div className="absolute top-16 right-10 flex flex-col space-y-6">
+      <div className="w-16 h-16 bg-blue-800 rounded-lg shadow-lg flex items-center justify-center transform -rotate-6">
+        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      </div>
+      <div className="w-16 h-16 bg-blue-800 rounded-lg shadow-lg flex items-center justify-center transform rotate-6">
+        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+    </div>
+
+    {/* Bottom Center Icon */}
+    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+        <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  {/* Content */}
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+      {/* Left Side (Empty) */}
+      <div className="flex justify-center"></div>
+
+      {/* Center Content */}
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }}
+        viewport={{ once: true }}
+      >
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Solutions</h1>
+        <h2 className="text-2xl md:text-3xl mb-4">Ideal web hosting</h2>
+        <p className="text-blue-200 mb-6 text-center text-sm md:text-base">
+          شركة العنكبوت الليبي هي الشركة الرائدة في تقديم حلول التكنولوجيا وألخدمات السحابية في ليبيا.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.input
+            type="text"
+            placeholder="Search for a new domain"
+            className="px-6 py-3 rounded-full border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-80"
+            whileFocus={{ scale: 1.02, transition: { duration: 0.3 } }}
+          />
+          <motion.button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
+            variants={buttonVariants}
+            whileHover="hover"
+          >
+            Search
+          </motion.button>
+        </div>
+      </motion.div>
+
+      {/* Right Side (Empty) */}
+      <div className="flex justify-center"></div>
+    </div>
+  </div>
+</motion.section>
+
+      {/* Services Section */}
+    <motion.section
+      className="py-20 bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={sectionVariants}
+    >
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <motion.div
+      className="text-center mb-16"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+      viewport={{ once: true }}
+    >
+      <h2 className="inline-block bg-purple-900 text-white text-lg font-semibold px-6 py-2 rounded-lg">
+        Our services
+      </h2>
+    </motion.div>
+
+    {/* Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {[
+        {
+          title: "Shared cloud hosting",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+        {
+          title: "Dedicated servers",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+        {
+          title: "Web hosting",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+        {
+          title: "Control panel license",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+        {
+          title: "Ranges",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+        {
+          title: "VPS",
+          description: "Host your website easily, comfortably, and at economical costs!",
+          price: "Starting from 45 SAR .SAR/month",
+          image: "/shared-hosting-card 1.svg",
+        },
+      ].map((service, index) => (
+        <motion.div
+          key={index}
+          className="rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col bg-white"
+          variants={cardVariants}
+          custom={index}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+        >
+          {/* Top Purple Section */}
+          <div className="bg-purple-900 w-full h-36 relative flex items-center justify-center rounded-b-[3rem]">
+            <motion.img
+              src={service.image}
+              alt={service.title}
+              className="w-28 h-28 object-contain relative -bottom-8"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.5 },
+              }}
+              viewport={{ once: true }}
+            />
           </div>
 
-          <div className="mt-20 mb-16">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Search and Buy a Domain</h1>
-            <p className="text-lg text-gray-300 mb-8">Grab the domain you’ve been looking for.</p>
+          {/* Content */}
+          <div className="flex flex-col items-center text-center px-6 pb-6 pt-12 flex-grow">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">
+              {service.title}
+            </h3>
+            <p className="text-gray-600 text-sm mb-6">
+              {service.description}
+            </p>
+          </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-lg max-w-2xl mx-auto">
-              <div className="flex items-center mb-4">
-                <div className="text-gray-400 mr-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="type here to search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 bg-transparent border-none outline-none text-gray-700 placeholder-gray-500"
-                />
-                <button className="bg-purple-800 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors">
-                  Search
-                </button>
-              </div>
+          {/* Price Footer */}
+          <div className="bg-purple-900 text-white text-sm font-medium text-center py-3">
+            {service.price}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</motion.section>
 
-              <div className="flex flex-wrap gap-4">
-                {['Popular', 'Geographic', 'Technology', 'Service', 'Business', 'Media', 'Shopping', 'More'].map(
-                  (tab) => (
-                    <button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      className={`flex flex-col items-center p-2 rounded-md transition-colors ${
-                        activeTab === tab ? 'text-purple-600 bg-purple-50' : 'text-gray-600 hover:text-purple-600'
-                      }`}
-                    >
-                      <div className="w-8 h-8 mb-1">
-                        {tab === 'Popular' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.12a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.12a1 1 0 00-1.175 0l-3.976 2.12c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.12c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Geographic' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17.657 16.657L13.707 12.707m-3 2.293a1 1 0 111.414-1.414L14 14.586V12a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2.586l-2.586 2.586a1 1 0 11-1.414-1.414zM11 14a1 1 0 11-2 0 1 1 0 012 0zm-2 0a1 1 0 11-2 0 1 1 0 012 0z"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Technology' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 20l4-16m4 4l4 4-4 4M6 16l4-4-4-4"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Service' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Business' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.336 2.146"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Media' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 10l4.553-2.727A1 1 0 0121 8.364v8.272a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'Shopping' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 3h2l.4 2M7 13h10a2 2 0 002-2V5.42a2 2 0 00-1.116-1.857L11 3.572a2 2 0 00-1.116 0L5.116 5.643A2 2 0 004 7.42v8.58a2 2 0 001.116 1.857L7 13z"
-                            />
-                          </svg>
-                        )}
-                        {tab === 'More' && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                            />
-                          </svg>
-                        )}
-                      </div>
-                      <span className="text-xs">{tab}</span>
-                    </button>
-                  )
-                )}
-              </div>
+      {/* Payment Methods */}
+      <motion.section
+        className="py-16 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Payment methods</h2>
+          </motion.div>
+          
+          <motion.div
+            className="bg-white rounded-lg shadow-lg p-8"
+            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+          >
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <motion.img 
+                src="https://www.fawry.com/images/fawry-logo.png" 
+                alt="Fawry" 
+                className="h-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.1 } }}
+                viewport={{ once: true }}
+              />
+              <motion.img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Vodafone_logo_2017.svg/1200px-Vodafone_logo_2017.svg.png" 
+                alt="Vodafone" 
+                className="h-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.2 } }}
+                viewport={{ once: true }}
+              />
+              <motion.img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" 
+                alt="VISA" 
+                className="h-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.3 } }}
+                viewport={{ once: true }}
+              />
+              <motion.img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" 
+                alt="Mastercard" 
+                className="h-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.4 } }}
+                viewport={{ once: true }}
+              />
+              <motion.img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png" 
+                alt="PayPal" 
+                className="h-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.5 } }}
+                viewport={{ once: true }}
+              />
             </div>
-          </div>
+            <p className="text-center text-gray-600">Pay using Fawry or more than 20 other payment methods</p>
+          </motion.div>
         </div>
-      </header>
+      </motion.section>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        {/* Popular Domains Section */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
-              Choose From the Most Popular Domains
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {domainTypes.map((domain, index) => (
-              <div
+      {/* Server Locations */}
+      <motion.section
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Server locations</h2>
+          </motion.div>
+          
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.7 } }}
+            viewport={{ once: true }}
+          >
+            <img src="/world-map.svg" />
+          </motion.div>
+          
+           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            {[
+              { name: "America", flag: "https://flagcdn.com/40x30/us.png",},
+              { name: "Britain", flag: "https://flagcdn.com/40x30/gb.png",  },
+              { name: "Türkiye", flag: "https://flagcdn.com/40x30/tr.png",  },
+              { name: "The UAE", flag: "https://flagcdn.com/40x30/ae.png",  },
+              { name: "Saudi Arabia", flag: "https://flagcdn.com/40x30/sa.png", },
+              { name: "Korea", flag: "https://flagcdn.com/40x30/kr.png",  },
+              { name: "Italy", flag: "https://flagcdn.com/40x30/it.png",  },
+              { name: "Finland", flag: "https://flagcdn.com/40x30/fi.png", },
+              { name: "Germany", flag: "https://flagcdn.com/40x30/de.png",},
+              { name: "Sudan", flag: "https://flagcdn.com/40x30/sd.png", }
+            ].map((location, index) => (
+              <motion.div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
               >
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600">Domain name</p>
-                  <p className="text-2xl font-bold text-purple-800">{domain.name}</p>
-                </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                    <motion.img 
+                      src={location.flag}
+                      alt={`${location.name} flag`}
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
                   <div>
-                    <p className="font-bold text-purple-800">{domain.price}</p>
-                    <p className="text-sm text-gray-500">{domain.originalPrice}</p>
-                  </div>
-                  <div className="text-gray-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <div className="font-medium text-gray-900">{location.name}</div>
+                    <div className="text-xs text-green-600">{location.latency}</div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </div>
+      </motion.section>
 
-        {/* Things To Remember Section */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-              Things To Remember Before you Buy Domains
-            </h2>
+      {/* Business Services */}
+      <motion.section
+        className="py-20 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Great services that meet your business needs</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              With our cloud products and services, you&apos;ll find that we meet 100% of your business and data needs, with superior security for your infrastructure.
+            </p>
+          </motion.div>
+          
+          <div className="flex justify-center mb-8 space-x-4">
+            {["Design and development", "Ranges", "Cloud services"].map((tab, index) => (
+              <motion.button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 rounded-md transition-colors ${
+                  activeTab === tab 
+                    ? "bg-blue-600 text-white" 
+                    : "bg-white text-gray-700 hover:bg-gray-100"
+                }`}
+                variants={buttonVariants}
+                whileHover="hover"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.1 } }}
+                viewport={{ once: true }}
+              >
+                {tab}
+              </motion.button>
+            ))}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-6xl font-bold text-purple-800 mb-4">01</div>
-              <h3 className="text-xl font-semibold mb-4">Stay simple</h3>
-              <p className="text-gray-600 text-sm">
-                Don’t get complicated. An easy-to-remember domain is always best.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl font-bold text-purple-800 mb-4">02</div>
-              <h3 className="text-xl font-semibold mb-4">Act now</h3>
-              <p className="text-gray-600 text-sm">
-                Stay true to your brand. Be distinct but choose a domain your audience will recognize.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl font-bold text-purple-800 mb-4">03</div>
-              <h3 className="text-xl font-semibold mb-4">Drop the hyphens</h3>
-              <p className="text-gray-600 text-sm">
-                Just because the internet is high-tech doesn’t mean your domain name should be.
-              </p>
-            </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                title: "JPaaS Platform as a Service",
+                description: "Managed PaaS with automated DevOps processes. Pay-per-use pricing.",
+                icon: "cloud"
+              },
+              {
+                title: "LS Suite",
+                description: "Professional email, online storage, corporate meetings, and more. Built to work.",
+                icon: "email"
+              },
+              {
+                title: "Shared cloud hosting",
+                description: "Host your website easily, comfortably and at an economical cost!. With shared cloud hosting.",
+                icon: "server"
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h1" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{service.title}</h3>
+                <p className="text-gray-600 text-sm mb-4">{service.description}</p>
+                <motion.button
+                  className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                >
+                  Learn more
+                </motion.button>
+              </motion.div>
+            ))}
           </div>
-        </section>
-
-        {/* TLD List Section */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-              Explore the Possibilities from Our TLD List
-            </h2>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-4 px-6 font-medium text-gray-700">TLD</th>
-                  <th className="text-left py-4 px-6 font-medium text-gray-700">Registration</th>
-                  <th className="text-left py-4 px-6 font-medium text-gray-700">Renewal</th>
-                  <th className="text-left py-4 px-6 font-medium text-gray-700">Transfer</th>
-                  <th className="text-left py-4 px-6 font-medium text-gray-700">ID Protection</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tldList.map((tld, index) => (
-                  <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                    <td className="py-4 px-6 font-medium text-gray-700">{tld.tld}</td>
-                    <td className="py-4 px-6 text-gray-700">{tld.registration}</td>
-                    <td className="py-4 px-6 text-gray-700">{tld.renewal}</td>
-                    <td className="py-4 px-6 text-gray-700">{tld.transfer}</td>
-                    <td className="py-4 px-6 text-gray-700">{tld.idProtection}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="flex justify-between items-center mt-6">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search"
-                className="pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6 } }}
+              viewport={{ once: true }}
+            >
+              <div className="flex space-x-4 mb-6">
+                <motion.button 
+                  className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                >
+                  AR
+                </motion.button>
+                <motion.button 
+                  className="bg-white text-gray-800 px-4 py-2 rounded-full text-sm font-medium"
+                  variants={buttonVariants}
+                  whileHover="hover"
+                >
+                  EN
+                </motion.button>
+              </div>
+              <motion.img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CPanel_logo.svg/1200px-CPanel_logo.svg.png" 
+                alt="Control Panel" 
+                className="rounded-lg shadow-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.7 } }}
+                viewport={{ once: true }}
               />
-              <div className="absolute right-3 top-2.5 text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-600">Per page:</span>
-              <button className="px-3 py-1 bg-purple-800 text-white rounded-md">1</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">2</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">3</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">4</button>
-              <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">5</button>
-              <button className="px-3 py-1 text-purple-800 font-medium">Next</button>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Buy Domains Section */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-              Why Buy Domains at &quot;Name&quot;?
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Domain locking</h3>
-              <p className="text-gray-600 text-sm">
-                Lock your domain to prevent unauthorized transfers of your domain names.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Great renewal rates</h3>
-              <p className="text-gray-600 text-sm">
-                When it’s time to renew your domain, you’ll never have to worry about breaking the bank.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.356-2m15.356 2H15"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Auto-renewal</h3>
-              <p className="text-gray-600 text-sm">
-                You’ll never lose your domain (even if you forget) thanks to our auto-renewal option.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Easy management</h3>
-              <p className="text-gray-600 text-sm">
-                Manage your domain with an easy-to-use control panel and dashboard.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.336 2.146"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Whois privacy protection</h3>
-              <p className="text-gray-600 text-sm">
-                Need some privacy? We’ll protect your personal info from the WHOIS database for a small fee.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-800 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold mb-4">Low prices & huge selection</h3>
-              <p className="text-gray-600 text-sm">
-                Register your domain for a low price and choose from a wide selection of extensions.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-              Domain Registration FAQs
-            </h2>
-          </div>
-
-          <div className="max-w-5xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/4">
-                <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8 text-blue-800"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-center mb-2">FAQ</h3>
-                  <div className="w-24 h-0.5 bg-blue-800 mx-auto"></div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6 } }}
+              viewport={{ once: true }}
+            >
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-gray-500">Subscriber services panel</span>
+                  <span className="text-sm font-medium">Comprehensive control panel</span>
                 </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8 text-blue-800"
-                        fill="none"
+                <p className="text-gray-600 mb-6">Fully managed, responsive and easy-to-use control panel to manage all your cloud services.</p>
+                
+                <div className="space-y-4">
+                  <div className="border border-gray-200 rounded-lg p-4">
+                    <motion.button 
+                      onClick={() => toggleSection('Easy management')}
+                      className="flex items-center justify-between w-full"
+                      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+                    >
+                      <span className="font-medium">Easy management</span>
+                      <motion.svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
+                        animate={{ rotate: expandedSection === 'Easy management' ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-center mb-2">مركز المساعدة</h3>
-                  <div className="w-24 h-0.5 bg-blue-800 mx-auto"></div>
-                </div>
-              </div>
-
-              <div className="md:w-3/4">
-                <div className="bg-white p-8 rounded-lg shadow-sm">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="border-b border-gray-200 last:border-b-0 pb-6 mb-6 last:mb-0">
-                      <button
-                        onClick={() => toggleFAQ(index)}
-                        className="flex justify-between items-center w-full text-left"
-                      >
-                        <span className="text-purple-800 font-medium">{faq.question}</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={`h-5 w-5 text-purple-800 transition-transform ${
-                            expandedFAQ === index ? 'rotate-180' : ''
-                          }`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </motion.svg>
+                    </motion.button>
+                    <AnimatePresence>
+                      {expandedSection === 'Easy management' && (
+                        <motion.div
+                          variants={expandVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="hidden"
+                          className="mt-2 text-sm text-gray-600"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
-                      {expandedFAQ === index && (
-                        <div className="mt-4 text-gray-600 text-sm">{faq.answer}</div>
+                          Complete management and a comprehensive overview of all your services in one place.
+                        </motion.div>
                       )}
-                    </div>
-                  ))}
+                    </AnimatePresence>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-4">
+                    <motion.button 
+                      onClick={() => toggleSection('Run with one click')}
+                      className="flex items-center justify-between w-full"
+                      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+                    >
+                      <span className="font-medium">Run with one click</span>
+                      <motion.svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        animate={{ rotate: expandedSection === 'Run with one click' ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </motion.svg>
+                    </motion.button>
+                    <AnimatePresence>
+                      {expandedSection === 'Run with one click' && (
+                        <motion.div
+                          variants={expandVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="hidden"
+                          className="mt-2 text-sm text-gray-600"
+                        >
+                          Launch your services instantly with a single click.
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  <div className="border border-gray-200 rounded-lg p-4">
+                    <motion.button 
+                      onClick={() => toggleSection('Run with one click 2')}
+                      className="flex items-center justify-between w-full"
+                      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+                    >
+                      <span className="font-medium">Run with one click</span>
+                      <motion.svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        animate={{ rotate: expandedSection === 'Run with one click 2' ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </motion.svg>
+                    </motion.button>
+                    <AnimatePresence>
+                      {expandedSection === 'Run with one click 2' && (
+                        <motion.div
+                          variants={expandVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="hidden"
+                          className="mt-2 text-sm text-gray-600"
+                        >
+                          Launch your services instantly with a single click.
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-100 py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-gray-600">
-            <p>© 2023 Name. All rights reserved.</p>
+            </motion.div>
           </div>
         </div>
-      </footer>
+      </motion.section>
+
+      {/* Partners */}
+      <motion.section
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our partners</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              We think about our partnerships with the pioneers of integration to provide secure and reliable hosting solutions that support the growth of our customers&apos; businesses and achieve their goals in the digital world.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Linode_logo.svg/1200px-Linode_logo.svg.png",
+                name: "Linode",
+                description: "It is the world's largest independent provider of open cloud services with 11 global data centers serving nearly one million customers and businesses around the world.",
+                link: "Show more"
+              },
+              {
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CPanel_logo.svg/1200px-CPanel_logo.svg.png",
+                name: "Cpanel",
+                description: "cPanel has been trusted by millions of users around the world for more than 20 years, and has remained the leading hosting automation platform.",
+                link: "Show more"
+              },
+              {
+                logo: "https://upload.wikimedia.org/wikipedia/commons/5/5c/CloudLinux_OS_Logo.png",
+                name: "Cloudlinux",
+                description: "CloudLinux OS is the leading multi-tenant platform. It improves server stability, density, and security by isolating each tenant.",
+                link: "Show more"
+              }
+            ].map((partner, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-lg border border-gray-200"
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
+              >
+                <div className="flex flex-col items-center text-center">
+                  <motion.img 
+                    src={partner.logo} 
+                    alt={partner.name} 
+                    className="w-24 h-24 mb-4"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+                    viewport={{ once: true }}
+                  />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{partner.name}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{partner.description}</p>
+                  <motion.button
+                    className="text-blue-600 text-sm font-medium hover:text-blue-800"
+                    variants={buttonVariants}
+                    whileHover="hover"
+                  >
+                    {partner.link}
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {[
+              { name: "AMD Epyc", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/AMD_Logo.svg/1200px-AMD_Logo.svg.png" },
+              { name: "cloudflare", logo: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Cloudflare_Logo.png" },
+              { name: "MemCached", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Memcached_logo.svg/1200px-Memcached_logo.svg.png" },
+              { name: "Imunify36", logo: "https://seeklogo.com/images/I/imunify360-logo-4F8C2F1A4B-seeklogo.com.png" },
+              { name: "MailChannel", logo: "https://www.mailchannels.com/wp-content/uploads/2020/03/mailchannels-logo.png" },
+              { name: "LiteSpeed", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/LiteSpeed_Logo.svg/1200px-LiteSpeed_Logo.svg.png" },
+              { name: "QUIC.cloud", logo: "https://www.quic.cloud/wp-content/uploads/2020/08/QUIC.cloud-Logo-Color.png" },
+              { name: "MariaDB", logo: "https://upload.wikimedia.org/wikipedia/commons/5/5e/MariaDB_logo.svg" },
+              { name: "JetBackup", logo: "https://seeklogo.com/images/J/jetbackup-logo-B5F3D4A4B1-seeklogo.com.png" },
+              { name: "softaculous", logo: "https://www.softaculous.com/images/softaculous_logo.png" }
+            ].map((partner, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 text-center"
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+              >
+                <motion.img 
+                  src={partner.logo} 
+                  alt={partner.name} 
+                  className="w-16 h-16 mx-auto mb-2"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+                  viewport={{ once: true }}
+                />
+                <div className="text-sm font-medium text-gray-900">{partner.name}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Customer Opinions */}
+      <motion.section
+        className="py-20 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Customer opinions</h2>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <motion.div
+              className="bg-white rounded-lg p-8 shadow-lg border border-gray-200"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+            >
+              <motion.div 
+                className="flex items-center justify-center mb-6"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1, transition: { duration: 0.5 } }}
+                viewport={{ once: true }}
+              >
+                <svg className="w-12 h-12 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.314c0-2.314.295-3.214 2.017-3.214h2.017V7.314S16.732 6 14.017 6H2.017v8.686h2.017c1.722 0 2.017 1.014 2.017 3.214v7.314zM7.314 21v-7.314c0-2.314.295-3.214 2.017-3.214h2.017V7.314S10.029 6 7.314 6H4.017v8.686h2.017c1.722 0 2.017 1.014 2.017 3.214v7.314z"/>
+                </svg>
+              </motion.div>
+              <p className="text-gray-600 mb-6 text-center">
+                Your team&apos;s professionalism, dedication, and attention to detail were evident throughout the process of developing the ISOC Libya website. The website was easy to use and attractive in design, and perfectly embodied the spirit and vision of ISOC Libya. We are very happy with the results and the positive feedback we have received on the site
+              </p>
+              <div className="text-center">
+                <div className="font-bold text-gray-900">Amjad Shweidi</div>
+                <div className="text-sm text-gray-500">Rice ISOC Libya</div>
+              </div>
+            </motion.div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: "help", label: "Help Center" },
+                { icon: "jobs", label: "Jobs" },
+                { icon: "services", label: "Subscriber services" },
+                { icon: "status", label: "Server status" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-lg p-6 shadow-lg border border-gray-200 text-center"
+                  variants={cardVariants}
+                  custom={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                >
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div className="text-sm font-medium text-gray-900">{item.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.section>
     </div>
   );
-}
+};
