@@ -128,25 +128,7 @@ export default function Home() {
           whileInView={{ scale: 1, transition: { duration: 0.5, ease: 'easeOut' } }}
           viewport={{ once: true }}
         >
-          <div className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center overflow-hidden">
-            <motion.img
-              src="/public/clock-icon.png" 
-              alt="Clock icon"
-              className="w-10 h-10 object-contain"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
-              viewport={{ once: true }}
-              onError={(e) => {
-                e.target.style.display = 'none';
-                // Fallback to SVG if image fails to load
-                e.target.parentElement.innerHTML = `
-                  <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                `;
-              }}
-            />
-          </div>
+          
         </motion.div>
       </motion.div>
     </div>
