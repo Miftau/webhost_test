@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('Design and development');
@@ -57,220 +56,209 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+     {/* Hero Section */}
+{/* Hero Section */}
+<motion.section
+  className="relative bg-gradient-to-br from-[#2B1F51] to-blue-800 text-white py-20 overflow-hidden"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={sectionVariants}
+>
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <motion.div 
+      className="absolute inset-0 bg-cover bg-center opacity-30"
+      style={{ backgroundImage: "url('/public/mask-group.png')" }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 0.3, transition: { duration: 1 } }}
+      viewport={{ once: true }}
+    />
+    
+    {/* Gradient overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-gradient-to-b from-[#2B1F51]/70 to-blue-800/70"></div>
+    
+    {/* Animated circles in background */}
+    <motion.div 
+      className="absolute top-0 left-0 w-64 h-64 bg-blue-700 opacity-20 rounded-full"
+      initial={{ scale: 0 }}
+      whileInView={{ scale: 1, transition: { duration: 1, ease: 'easeOut' } }}
+      viewport={{ once: true }}
+    />
+    <motion.div 
+      className="absolute bottom-0 right-0 w-64 h-64 bg-blue-700 opacity-20 rounded-full"
+      initial={{ scale: 0 }}
+      whileInView={{ scale: 1, transition: { duration: 1, ease: 'easeOut' } }}
+      viewport={{ once: true }}
+    />
+  </div>
+  
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+    <div className="flex flex-col items-center justify-center text-center">
+      {/* Main content */}
+      <motion.div 
+        className="w-full max-w-2xl"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }}
+        viewport={{ once: true }}
+      >
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Solutions</h1>
+        <h2 className="text-2xl md:text-3xl mb-2">Ideal web hosting</h2>
+        <p className="text-blue-200 mb-8 text-center">
+          شركة العنكبوت الليبي هي الشركة الرائدة في تقديم حلول التكنولوجيا وألخدمات السحابية في ليبيا.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.input 
+            type="text" 
+            placeholder="Search for a new domain" 
+            className="px-6 py-3 rounded-full border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-100 text-white-800"
+            whileFocus={{ scale: 1.02, transition: { duration: 0.3 } }}
+          />
+          <motion.button 
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
+            variants={buttonVariants}
+            whileHover="hover"
+          >
+            Search
+          </motion.button>
+        </div>
+        <motion.div 
+          className="mt-6 flex justify-center"
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1, transition: { duration: 0.5, ease: 'easeOut' } }}
+          viewport={{ once: true }}
+        >
+          <div className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center overflow-hidden">
+            <motion.img
+              src="/public/clock-icon.png" 
+              alt="Clock icon"
+              className="w-10 h-10 object-contain"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
+              viewport={{ once: true }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                // Fallback to SVG if image fails to load
+                e.target.parentElement.innerHTML = `
+                  <svg class="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                `;
+              }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>
+</motion.section>
+
+      {/* Services Section */}
       <motion.section
-        className="relative bg-gradient-to-br from-blue-900 to-blue-800 text-white py-20"
+        className="py-20 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionVariants}
       >
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div 
-            className="absolute top-0 left-0 w-64 h-64 bg-blue-700 opacity-20 rounded-full"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1, transition: { duration: 1, ease: 'easeOut' } }}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
             viewport={{ once: true }}
-          />
-          <motion.div 
-            className="absolute bottom-0 right-0 w-64 h-64 bg-blue-700 opacity-20 rounded-full"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1, transition: { duration: 1, ease: 'easeOut' } }}
-            viewport={{ once: true }}
-          />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <motion.div 
-              className="flex justify-center"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }}
-              viewport={{ once: true }}
-            >
-              <div className="space-y-4">
-                <div className="w-24 h-24 bg-white bg-opacity-10 rounded-lg flex items-center justify-center">
-                  <svg className="w-12 h-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h1" />
-                  </svg>
-                </div>
-                <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6v16h-6M4 4h6v16H4" />
-                  </svg>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }}
-              viewport={{ once: true }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Solutions</h1>
-              <h2 className="text-2xl md:text-3xl mb-2">Ideal web hosting</h2>
-              <p className="text-blue-200 mb-8 text-center">
-                شركة العنكبوت الليبي هي الشركة الرائدة في تقديم حلول التكنولوجيا وألخدمات السحابية في ليبيا.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.input 
-                  type="text" 
-                  placeholder="Search for a new domain" 
-                  className="px-6 py-3 rounded-full border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-80"
-                  whileFocus={{ scale: 1.02, transition: { duration: 0.3 } }}
-                />
-                <motion.button 
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
-                  variants={buttonVariants}
-                  whileHover="hover"
-                >
-                  Search
-                </motion.button>
-              </div>
-              <motion.div 
-                className="mt-6 flex justify-center"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1, transition: { duration: 0.5, ease: 'easeOut' } }}
+          >
+            <h2 className="inline-block bg-[#2B1F51] text-white text-lg font-semibold px-6 py-2 rounded-lg">
+              Our services
+            </h2>
+          </motion.div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Shared cloud hosting",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+              {
+                title: "Dedicated servers",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+              {
+                title: "Web hosting",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+              {
+                title: "Control panel license",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+              {
+                title: "Ranges",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+              {
+                title: "VPS",
+                description: "Host your website easily, comfortably, and at economical costs!",
+                price: "Starting from 45 SAR .SAR/month",
+                image: "/shared-hosting-card 1.svg",
+              },
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                className="rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col bg-white"
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
               >
-                <div className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <svg className="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                {/* Top Brand Section */}
+                <div className="bg-[#2B1F51] w-full h-36 relative flex items-center justify-center rounded-b-[5rem]">
+                  <motion.img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-28 h-28 object-contain relative -bottom-8"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{
+                      opacity: 1,
+                      scale: 1,
+                      transition: { duration: 0.5 },
+                    }}
+                    viewport={{ once: true }}
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col items-center text-center px-6 pb-6 pt-12 flex-grow">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-6">
+                    {service.description}
+                  </p>
+                </div>
+
+                {/* Price Footer */}
+                <div className="bg-[#2B1F51] text-white text-sm font-medium text-center py-3">
+                  {service.price}
                 </div>
               </motion.div>
-            </motion.div>
-            
-            <motion.div 
-              className="flex justify-center"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }}
-              viewport={{ once: true }}
-            >
-              <div className="space-y-4">
-                <div className="w-24 h-24 bg-blue-700 rounded-lg flex items-center justify-center">
-                  <svg className="w-12 h-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-              </div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
-
-      {/* Services Section */}
-    <motion.section
-      className="py-20 bg-white"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={sectionVariants}
-    >
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Header */}
-    <motion.div
-      className="text-center mb-16"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
-      viewport={{ once: true }}
-    >
-      <h2 className="inline-block bg-purple-900 text-white text-lg font-semibold px-6 py-2 rounded-lg">
-        Our services
-      </h2>
-    </motion.div>
-
-    {/* Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      {[
-        {
-          title: "Shared cloud hosting",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-        {
-          title: "Dedicated servers",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-        {
-          title: "Web hosting",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-        {
-          title: "Control panel license",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-        {
-          title: "Ranges",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-        {
-          title: "VPS",
-          description: "Host your website easily, comfortably, and at economical costs!",
-          price: "Starting from 45 SAR .SAR/month",
-          image: "/shared-hosting-card 1.svg",
-        },
-      ].map((service, index) => (
-        <motion.div
-          key={index}
-          className="rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col bg-white"
-          variants={cardVariants}
-          custom={index}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-        >
-          {/* Top Purple Section */}
-          <div className="bg-purple-900 w-full h-36 relative flex items-center justify-center rounded-b-[3rem]">
-            <motion.img
-              src={service.image}
-              alt={service.title}
-              className="w-28 h-28 object-contain relative -bottom-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{
-                opacity: 1,
-                scale: 1,
-                transition: { duration: 0.5 },
-              }}
-              viewport={{ once: true }}
-            />
-          </div>
-
-          {/* Content */}
-          <div className="flex flex-col items-center text-center px-6 pb-6 pt-12 flex-grow">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              {service.title}
-            </h3>
-            <p className="text-gray-600 text-sm mb-6">
-              {service.description}
-            </p>
-          </div>
-
-          {/* Price Footer */}
-          <div className="bg-purple-900 text-white text-sm font-medium text-center py-3">
-            {service.price}
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</motion.section>
 
       {/* Payment Methods */}
       <motion.section
@@ -368,22 +356,22 @@ export default function Home() {
             <img src="/world-map.svg" />
           </motion.div>
           
-           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {[
-              { name: "America", flag: "https://flagcdn.com/40x30/us.png", latency: "50 ms" },
-              { name: "Britain", flag: "https://flagcdn.com/40x30/gb.png",  latency: "60 ms" },
-              { name: "Türkiye", flag: "https://flagcdn.com/40x30/tr.png",  latency: "70 ms" },
-              { name: "The UAE", flag: "https://flagcdn.com/40x30/ae.png",  latency: "80 ms" },
-              { name: "Saudi Arabia", flag: "https://flagcdn.com/40x30/sa.png", Latency: "90 ms" },
-              { name: "Korea", flag: "https://flagcdn.com/40x30/kr.png",  latency: "100 ms" },
-              { name: "Italy", flag: "https://flagcdn.com/40x30/it.png",  latency: "110 ms" },
-              { name: "Finland", flag: "https://flagcdn.com/40x30/fi.png", latency: "120 ms" },
-              { name: "Germany", flag: "https://flagcdn.com/40x30/de.png", latency: "130 ms" },
-              { name: "Sudan", flag: "https://flagcdn.com/40x30/sd.png", latency: "140 ms" },
+              { name: "The UAE", flag: "https://flagcdn.com/w320/ae.png", latency: "26.9ms" },
+              { name: "Germany", flag: "https://flagcdn.com/w320/de.png", latency: "26.2ms" },
+              { name: "Finland", flag: "https://flagcdn.com/w320/fi.png", latency: "16.1ms" },
+              { name: "Korea", flag: "https://flagcdn.com/w320/kr.png", latency: "18.1ms" },
+              { name: "Italy", flag: "https://flagcdn.com/w320/it.png", latency: "14.7ms" },
+              { name: "Saudi Arabia", flag: "https://flagcdn.com/w320/sa.png", latency: "14.5ms" },
+              { name: "Sudan", flag: "https://flagcdn.com/w320/sd.png", latency: "18.0ms" },
+              { name: "Türkiye", flag: "https://flagcdn.com/w320/tr.png", latency: "19.7ms" },
+              { name: "Britain", flag: "https://flagcdn.com/w320/gb.png", latency: "12.3ms" },
+              { name: "America", flag: "https://flagcdn.com/w320/us.png", latency: "13.6ms" },
             ].map((location, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
+                className="bg-white rounded-xl p-5 shadow-lg border border-gray-100 flex flex-col items-center space-y-4 hover:shadow-xl transition-all"
                 variants={cardVariants}
                 custom={index}
                 initial="hidden"
@@ -391,21 +379,22 @@ export default function Home() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                    <motion.img 
-                      src={location.flag}
-                      alt={`${location.name} flag`}
-                      className="w-full h-full object-cover"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
-                      viewport={{ once: true }}
-                    />
-                  </div>
-                  <div>
-                    <div className="font-medium text-gray-900">{location.name}</div>
-                    <div className="text-xs text-green-600">{location.latency}</div>
-                  </div>
+                {/* Flag - Larger and more prominent */}
+                <div className="w-28 h-20 rounded-lg overflow-hidden flex items-center justify-center bg-gray-100 shadow-md">
+                  <motion.img
+                    src={location.flag}
+                    alt={`${location.name} flag`}
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }}
+                    viewport={{ once: true }}
+                  />
+                </div>
+
+                {/* Text Content - Centered and more visible */}
+                <div className="text-center">
+                  <div className="font-semibold text-gray-800 text-base mb-1">{location.name}</div>
+                  <div className="text-green-600 font-medium text-lg">{location.latency}</div>
                 </div>
               </motion.div>
             ))}
@@ -524,7 +513,7 @@ export default function Home() {
                 </motion.button>
               </div>
               <motion.img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/CPanel_logo.svg/1200px-CPanel_logo.svg.png" 
+                src="/client-dashboard.svg" 
                 alt="Control Panel" 
                 className="rounded-lg shadow-lg"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -797,7 +786,7 @@ export default function Home() {
                 whileInView={{ scale: 1, transition: { duration: 0.5 } }}
                 viewport={{ once: true }}
               >
-                <svg className="w-12 h-12 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12 text-[#2B1F51]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.314c0-2.314.295-3.214 2.017-3.214h2.017V7.314S16.732 6 14.017 6H2.017v8.686h2.017c1.722 0 2.017 1.014 2.017 3.214v7.314zM7.314 21v-7.314c0-2.314.295-3.214 2.017-3.214h2.017V7.314S10.029 6 7.314 6H4.017v8.686h2.017c1.722 0 2.017 1.014 2.017 3.214v7.314z"/>
                 </svg>
               </motion.div>

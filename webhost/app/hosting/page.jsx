@@ -351,15 +351,6 @@ export default function Hosting() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="bg-gray-800 text-white py-12">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <p className="text-sm sm:text-base">© 2023 جميع الحقوق محفوظة</p>
-            </div>
-          </div>
-        </footer>
       </div>
 
       {/* Inline CSS for animations */}
