@@ -180,37 +180,37 @@ export default function Home() {
               {
                 title: "Shared cloud hosting",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
               {
                 title: "Dedicated servers",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
               {
                 title: "Web hosting",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
               {
                 title: "Control panel license",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
               {
                 title: "Ranges",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
               {
                 title: "VPS",
                 description: "Host your website easily, comfortably, and at economical costs!",
-                price: "Starting from 45 SAR .SAR/month",
+                price: "Starting from 45 SAR/month",
                 image: "/shared-hosting-card 1.svg",
               },
             ].map((service, index) => (
@@ -284,9 +284,9 @@ export default function Home() {
           >
             <div className="flex items-center justify-center space-x-4 mb-4">
               <motion.img 
-                src="https://www.fawry.com/images/fawry-logo.png" 
+                src="https://wp.logos-download.com/wp-content/uploads/2023/02/Fawry_Logo-3000x849.png" 
                 alt="Fawry" 
-                className="h-6"
+                className="h-4"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.1 } }}
                 viewport={{ once: true }}
@@ -300,7 +300,7 @@ export default function Home() {
                 viewport={{ once: true }}
               />
               <motion.img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" 
+                src="https://i.logos-download.com/247/29146-s1280-038dd9340c3bcf6cc1fd4fec8c72ec88.avif/Visa_Logo_2014-s1280.avif" 
                 alt="VISA" 
                 className="h-6"
                 initial={{ opacity: 0, x: -20 }}
@@ -308,7 +308,7 @@ export default function Home() {
                 viewport={{ once: true }}
               />
               <motion.img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" 
+                src="https://wp.logos-download.com/wp-content/uploads/2016/03/Mastercard_Logo_2016-700x543.png" 
                 alt="Mastercard" 
                 className="h-6"
                 initial={{ opacity: 0, x: -20 }}

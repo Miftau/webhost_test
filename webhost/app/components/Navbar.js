@@ -23,11 +23,11 @@ export default function Navbar() {
         <Link href="/hosting" className="text-gray-700 hover:text-purple-900 transition-colors">
           Hosting
         </Link>
-        <Link href="/prohosting" className="text-gray-700 hover:text-purple-900 transition-colors">
-          ProHosting
+        <Link href="/servers" className="text-gray-700 hover:text-purple-900 transition-colors">
+          Servers
         </Link>
-        <Link href="/domains" className="text-gray-700 hover:text-purple-900 transition-colors">
-          Domains
+        <Link href="/payment" className="text-gray-700 hover:text-purple-900 transition-colors">
+          Payment Methods
         </Link>
         <Link href="/help" className="text-gray-700 hover:text-purple-900 transition-colors">
           Need Help?
