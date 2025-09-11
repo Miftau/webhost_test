@@ -15,11 +15,24 @@ const SharedHosting = () => {
   return (
     <div className="overflow-x-hidden">
       <HeroSection
-        title="الاستضافات المشتركة"
-        description="كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات كلام و المشتركة كلام و وصف للاستضافات المشتركة"
-        primaryButtonText="انشاء حساب"
-        secondaryButtonText="عرض الاسعار"
-        imageBottom="/images/full-shared-hero.svg"
+        title="خدمة الاستضافة السحابية"
+        description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+        primaryButtonText="ابدأ الآن"
+        primaryButtonLink="/signup"
+        secondaryButtonText="الخطط والأسعار"
+        secondaryButtonLink="/pricing"
+        sideBox={{
+          border: "/custom-border.svg",
+          container: "/custom-container.svg",
+          floating: "/custom-floating.svg",
+          shadow: "/custom-shadow.svg",
+        }}
+        centerBox={{
+          border: "/main-border.svg",
+          container: "/main-container.svg",
+          floating: "/main-floating.svg",
+          shadow: "/main-shadow.svg",
+        }}
       />
       <PricingCard/>
       <PaymentSection/>
