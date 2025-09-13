@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "../components/HeroSection/HeroSection";
+import HeroSectionNormal from "../components/HeroSectionNormal/HeroSectionNormal";
 import WhyUsSection from "../components/Security/WhyUsSection";
 import ImageSection from "../components/Security/ImageSection";
 import WhoisTool from "../components/Security/WhoisTool";
@@ -9,7 +9,7 @@ import BeastMain from "../components/Security/BeastMain";
 const Security = () => {
   return (
     <div className="overflow-x-hidden">
-      <HeroSection
+      <HeroSectionNormal
         title="الأمان"
         description="تعزيز الأمان لموقعك الإلكتروني مع خدماتنا المتقدمة"
         primaryButtonText="ابدأ الآن"

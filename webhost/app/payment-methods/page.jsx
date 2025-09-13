@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "../components/HeroSection/HeroSection";
+import HeroSectionNormal from "../components/HeroSectionNormal/HeroSectionNormal";
 import BankTransfer from "../components/PaymentMethods/BankTransfer";
 import ElectronicWallets from "../components/PaymentMethods/ElectronicWallets";
 import OnlinePayment from "../components/PaymentMethods/OnlinePayment";
@@ -10,7 +10,7 @@ import TraditionalMethods from "../components/PaymentMethods/TraditionalMethods"
 const PaymentMethods = () => {
   return (
     <div className="overflow-x-hidden">
-      <HeroSection
+      <HeroSectionNormal
         title="طرق الدفع"
         description="ادفع بالطريقة التي تناسبك واستمتع بتجربة دفع سهلة وسلسة" 
         secondaryButtonText="أبدأالآن"

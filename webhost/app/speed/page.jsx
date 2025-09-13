@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "../components/HeroSection/HeroSection";
+import HeroSectionNormal from "../components/HeroSectionNormal/HeroSectionNormal";
 import LaunchHero from "../components/Fast/LaunchHero/LaunchHero";
 import BackGroundSection from "../components/Fast/BackGroundSection/BackGroundSection";
 import Asks from "../components/DataCenter/Asks/Asks";
@@ -9,7 +9,7 @@ import SpeedAdvantage from "../components/SpeedAdvantage";
 const Fast = () => {
   return (
     <div className="overflow-x-hidden">
-      <HeroSection
+      <HeroSectionNormal
         title="السرعة"
         description="احمِ بيانات موقعك، واعرض لزوارك شهادة الأمان الخاصة بك."
         primaryButtonText="ابدا الان!"

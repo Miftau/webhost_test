@@ -12,12 +12,25 @@ import ImageSection from '../components/Security/ImageSection'
 const Programmers = () => {
     return (
         <div className="overflow-x-hidden">
-            <HeroSection
-                title="Hosting programmers"
-                description="خوادم سحابية عالية الأداء والثبات تصل إلى 100% مع مواقع جغرافية متعددة"
-                primaryButtonText="سجل الان"
-                imageBottom="/images/dev-host-hero.svg"
-                imageAlt="Hero Background"
+           <HeroSection
+              title="خدمة الاستضافة السحابية"
+              description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+              primaryButtonText="ابدأ الآن"
+              primaryButtonLink="/signup"
+              secondaryButtonText="الخطط والأسعار"
+              secondaryButtonLink="/pricing"
+              sideBox={{
+                border: "/images/border-two.svg",
+                container: "/images/hero-box-container.svg",
+                floating: "/images/hero-box.svg",
+                shadow: "/images/sm-shadow.svg",
+              }}
+              centerBox={{
+                border: "/images/border-one.svg",
+                container: "/images/hero-windows-container.svg",
+                floating: "/images/hero-windows.svg",
+                shadow: "/images/lg-shadow.svg",
+              }}
             />
             <WhyChooseUs />
             <ImageSection/>

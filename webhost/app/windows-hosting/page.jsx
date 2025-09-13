@@ -11,14 +11,25 @@ const WindowsHosting = () => {
   return (
     <div className="overflow-x-hidden">
       <HeroSection
-        title="استضافة ويندوز"
-        description="واحدة من أفضل وأسرع وأسهل خدمات الاستضافة"
-        primaryButtonText="انشاء حساب"
-        secondaryButtonText="سجل الآن"
-        imageBottom="/images/winds-hero.svg"
-        imageAltBottom="Hero Background"
-    
-      />
+              title="خدمة الاستضافة السحابية"
+              description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+              primaryButtonText="ابدأ الآن"
+              primaryButtonLink="/signup"
+              secondaryButtonText="الخطط والأسعار"
+              secondaryButtonLink="/pricing"
+              sideBox={{
+                border: "/images/border-two.svg",
+                container: "/images/hero-box-container.svg",
+                floating: "/images/hero-box.svg",
+                shadow: "/images/sm-shadow.svg",
+              }}
+              centerBox={{
+                border: "/images/border-one.svg",
+                container: "/images/hero-windows-container.svg",
+                floating: "/images/hero-windows.svg",
+                shadow: "/images/lg-shadow.svg",
+              }}
+            />
       <KubernetesWindosHosting />
       <PricingCard />
       <CloudAdoptionSupport />

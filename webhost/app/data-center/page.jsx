@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "../components/HeroSection/HeroSection";
+import HeroSectionNormal from "../components/HeroSectionNormal/HeroSectionNormal";
 import GrowthSection from "../components/DataCenter/GrowthSection/GrowthSection";
 import ServerLocation from "../components/DataCenter/ServerLocation/ServerLocation";
 import Services from "../components/DataCenter/Services/Services";
@@ -9,13 +9,13 @@ import Asks from "../components/DataCenter/Asks/Asks";
 const DataCenter = () => {
   return (
     <div className="overflow-x-hidden">
-      <HeroSection
+      <HeroSectionNormal
         title="مراكز البيانات"
         description="كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات كلام و المشتركة كلام و وصف للاستضافات المشتركة"
         primaryButtonText="انشاء حساب"
         secondaryButtonText="عرض الاسعار"
-        imagesrc="/images/Group1.png"
-        imageAlt="Hero Background"
+        imageBottom="/images/Group1.png"
+        imageAltBottom="Hero Background"
       />
 
       <GrowthSection />

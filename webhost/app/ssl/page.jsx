@@ -9,13 +9,25 @@ import FeaturesSection from "../components/SSL/FeaturesSection";
 const SSL = () => {
   return (
     <div>
-      <HeroSection
-        title="الاستضافات المشتركة"
-        description="كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات كلام و المشتركة كلام و وصف للاستضافات المشتركة"
-        primaryButtonText="انشاء حساب"
-        secondaryButtonText="عرض الاسعار"
-        imagesrc="/images/Group4027.png"
-        imageAlt="Hero Background"
+     <HeroSection
+        title="خدمة الاستضافة السحابية"
+        description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+        primaryButtonText="ابدأ الآن"
+        primaryButtonLink="/signup"
+        secondaryButtonText="الخطط والأسعار"
+        secondaryButtonLink="/pricing"
+        sideBox={{
+          border: "/images/border-two.svg",
+          container: "/images/hero-box-container.svg",
+          floating: "/images/hero-box.svg",
+          shadow: "/images/sm-shadow.svg",
+        }}
+        centerBox={{
+          border: "/images/border-one.svg",
+          container: "/images/hero-windows-container.svg",
+          floating: "/images/hero-windows.svg",
+          shadow: "/images/lg-shadow.svg",
+        }}
       />
       <SSLCertificates />
       <SecuritySection />

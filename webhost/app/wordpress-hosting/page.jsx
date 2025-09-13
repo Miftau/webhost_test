@@ -16,14 +16,25 @@ const WordPressHosting = () => {
   return (
     <div>
       <HeroSection
-        title="استضافة ووردبريس مُدارة بأداء فائق وسرعة لا مثيل لها"
-        description="احصل على استضافة ووردبريس مُدارة بالكامل مع أداء فائق وسرعة لا مثيل لها، مما يضمن لموقعك الإلكتروني تجربة مستخدم سلسة وسريعة."
-        primaryButtonText="ابدأ الآن"
-        secondaryButtonText="تعرّف على المزيد"
-        imageBottom="/images/wpfull.svg"
-        imageAltTop="Background top"
-
-      />
+              title="خدمة الاستضافة السحابية"
+              description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+              primaryButtonText="ابدأ الآن"
+              primaryButtonLink="/signup"
+              secondaryButtonText="الخطط والأسعار"
+              secondaryButtonLink="/pricing"
+              sideBox={{
+                border: "/images/border-two.svg",
+                container: "/images/hero-box-container.svg",
+                floating: "/images/hero-box.svg",
+                shadow: "/images/sm-shadow.svg",
+              }}
+              centerBox={{
+                border: "/images/border-one.svg",
+                container: "/images/hero-windows-container.svg",
+                floating: "/images/hero-windows.svg",
+                shadow: "/images/lg-shadow.svg",
+              }}
+            />
       <FreeToolsSection />
       <WordPressGrowSection />
       <PricingCard />

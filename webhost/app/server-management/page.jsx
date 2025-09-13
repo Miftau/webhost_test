@@ -9,14 +9,26 @@ import WindowsKeyAdSection from "../components/WindowsKeyAdSection";
 const ServerManagement = () => {
   return (
     <div className="overflow-x-hidden">
-      <HeroSection
-        title="إدارة الخوادم"
-        description="دعنا ندير جميع خوادمك من أجلك!"
-        primaryButtonText="تسجيل الان"
-        secondaryButtonText="سجل الآن!"
-        imageBottom="/images/server-m.svg"
-        imageAltBottom="Hero Background"
-      />
+    <HeroSection
+              title="خدمة الاستضافة السحابية"
+              description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+              primaryButtonText="ابدأ الآن"
+              primaryButtonLink="/signup"
+              secondaryButtonText="الخطط والأسعار"
+              secondaryButtonLink="/pricing"
+              sideBox={{
+                border: "/images/border-two.svg",
+                container: "/images/hero-box-container.svg",
+                floating: "/images/hero-box.svg",
+                shadow: "/images/sm-shadow.svg",
+              }}
+              centerBox={{
+                border: "/images/border-one.svg",
+                container: "/images/hero-windows-container.svg",
+                floating: "/images/hero-windows.svg",
+                shadow: "/images/lg-shadow.svg",
+              }}
+            />
       <PricingCard />
       <BackupsGrowSection />
       <PlatformSupport />
