@@ -10,12 +10,24 @@ const ServerManagement = () => {
   return (
     <div className="overflow-x-hidden">
       <HeroSection
-        title="إدارة الخوادم"
-        description="دعنا ندير جميع خوادمك من أجلك!"
-        primaryButtonText="تسجيل الان"
-        secondaryButtonText="سجل الآن!"
-        imageBottom="/images/server-m.svg"
-        imageAltBottom="Hero Background"
+        title="خدمة الاستضافة السحابية"
+        description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+        primaryButtonText="ابدأ الآن"
+        primaryButtonLink="/signup"
+        secondaryButtonText="الخطط والأسعار"
+        secondaryButtonLink="/pricing"
+        sideBox={{
+          border: "/custom-border.svg",
+          container: "/custom-container.svg",
+          floating: "/custom-floating.svg",
+          shadow: "/custom-shadow.svg",
+        }}
+        centerBox={{
+          border: "/main-border.svg",
+          container: "/main-container.svg",
+          floating: "/main-floating.svg",
+          shadow: "/main-shadow.svg",
+        }}
       />
       <PricingCard />
       <BackupsGrowSection />
