@@ -115,7 +115,7 @@ export function NavigationMenuDemo() {
   }, []);
 
   return (
-    <div className="bg-[#092346]">
+    <div className="bg-[#092346] pt-4 px-4 sm:px-20">
       {/* Navigation Bar */}
       <nav className="bg-transparent bg-opacity-0  sticky top-0 z-50">
         <div className="container w-full mx-auto px-4">
