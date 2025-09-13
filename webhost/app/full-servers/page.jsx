@@ -17,16 +17,16 @@ const ServerManagement = () => {
         secondaryButtonText="الخطط والأسعار"
         secondaryButtonLink="/pricing"
         sideBox={{
-          border: "/custom-border.svg",
-          container: "/custom-container.svg",
-          floating: "/custom-floating.svg",
-          shadow: "/custom-shadow.svg",
+          border: "/images/border-two.svg",
+          container: "/images/hero-box-container.svg",
+          floating: "/images/hero-box.svg",
+          shadow: "/images/sm-shadow.svg",
         }}
         centerBox={{
-          border: "/main-border.svg",
-          container: "/main-container.svg",
-          floating: "/main-floating.svg",
-          shadow: "/main-shadow.svg",
+          border: "/images/border-one.svg",
+          container: "/images/hero-windows-container.svg",
+          floating: "/images/hero-windows.svg",
+          shadow: "/images/lg-shadow.svg",
         }}
       />
       <PricingCard />
