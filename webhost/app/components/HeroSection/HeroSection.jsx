@@ -88,7 +88,7 @@ const HeroSection = ({
           </div>
 
           {/* Center Box */}
-          <div className="relative w-[452px] h-[262px]">
+          <div className="relative w-[452px] h-[262px] mx-48">
             <img src={centerBox.border} alt="border" className="absolute inset-0 w-full h-full" />
             <img src={centerBox.container} alt="container" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[317px] h-[250px]" />
             <img src={centerBox.floating} alt="floating" className="absolute -top-15 left-1/2 -translate-x-1/2 w-[100px] h-[100px] animate-float" />
