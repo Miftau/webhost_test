@@ -53,13 +53,26 @@ const AE = () => {
 
   return (
     <div className="overflow-x-hidden">
-       <HeroSection
-        title="الاستضافات"
-        description="من افضل واسرع واسهل الاستضافات"
-        primaryButtonText="سجل الان"
-        imageBottom="/images/ae.svg"
-        imageAltBottom="Hero Background"
-      />
+      <HeroSection
+               title="الاستضافات"
+               description="من افضل واسرع واسهل الاستضافات"
+              primaryButtonText="ابدأ الآن"
+              primaryButtonLink="/signup"
+              secondaryButtonText="الخطط والأسعار"
+              secondaryButtonLink="/pricing"
+              sideBox={{
+                border: "/images/border-two.svg",
+                container: "/images/hero-box-container.svg",
+                floating: "/images/hero-box.svg",
+                shadow: "/images/sm-shadow.svg",
+              }}
+              centerBox={{
+                border: "/images/border-one.svg",
+                container: "/images/hero-windows-container.svg",
+                floating: "/images/hero-windows.svg",
+                shadow: "/images/lg-shadow.svg",
+              }}
+            />
       <DomainSection
         title="احصل على اسم نطاق sa. من المسجل رقم #1"
         description="الآلاف من أسماء نطاق sa. تم تسجيلها بالفعل، سارع بالتسجيل واحجز اسم نطاقك الفريد sa. الآن مع عدّة امتدادات متنوّعة متوفّرة"
