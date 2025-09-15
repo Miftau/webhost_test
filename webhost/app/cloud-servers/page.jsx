@@ -16,8 +16,8 @@ const CloudServers = () => {
   return (
     <div className="overflow-x-hidden">
       <HeroSection
-        title="خدمة الاستضافة السحابية"
-        description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
+        title="الاستضافات المشتركة"
+        description="كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات المشتركة كلام و وصف للاستضافات كلام و المشتركة كلام و وصف للاستضافات المشتركة"
         primaryButtonText="ابدأ الآن"
         primaryButtonLink="/signup"
         secondaryButtonText="الخطط والأسعار"
@@ -31,7 +31,7 @@ const CloudServers = () => {
         centerBox={{
           border: "/images/border-one.svg",
           container: "/images/hero-windows-container.svg",
-          floating: "/images/hero-windows.svg",
+          floating: "/images/backupHero.svg",
           shadow: "/images/lg-shadow.svg",
         }}
       />
