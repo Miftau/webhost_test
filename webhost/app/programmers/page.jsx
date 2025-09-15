@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroSection from '../components/HeroSection/HeroSection'
+import HeroSectionDiff from '../components/HeroSection/HeroSectionDiff'
 import WhyChooseUs from '../components/Programmers/WhyChooseUs'
 import PricingCard from '../components/SharedHosting/PricingCard'
 import FeatureSection from '../components/Programmers/FeactureSection'
@@ -12,26 +12,35 @@ import ImageSection from '../components/Security/ImageSection'
 const Programmers = () => {
     return (
         <div className="overflow-x-hidden">
-           <HeroSection
-              title="خدمة الاستضافة السحابية"
-              description="منصة قوية وآمنة لإدارة مواقعك بسهولة"
-              primaryButtonText="ابدأ الآن"
-              primaryButtonLink="/signup"
-              secondaryButtonText="الخطط والأسعار"
-              secondaryButtonLink="/pricing"
-              sideBox={{
-                border: "/images/border-two.svg",
-                container: "/images/hero-box-container.svg",
-                floating: "/images/hero-box.svg",
-                shadow: "/images/sm-shadow.svg",
-              }}
-              centerBox={{
-                border: "/images/border-one.svg",
-                container: "/images/hero-windows-container.svg",
-                floating: "/images/hero-windows.svg",
-                shadow: "/images/lg-shadow.svg",
-              }}
-            />
+          <HeroSectionDiff
+            title="Welcome to Our Platform"
+            description="Discover amazing features designed to enhance your experience and boost productivity."
+            primaryButtonText="Get Started"
+            primaryButtonLink="/signup"
+            secondaryButtonText="Learn More"
+            secondaryButtonLink="/about"
+            
+            leftSideBox={{
+              border: "/images/left-border.png",
+              container: "/images/left-container.png",
+              floating: "/images/left-floating.png",
+              shadow: "/images/left-shadow.png"
+            }}
+            rightSideBox={{
+              border: "/images/right-border.png",
+              container: "/images/right-container.png",
+              floating: "/images/right-floating.png",
+              shadow: "/images/right-shadow.png"
+            }}
+            
+            centerBox={{
+              border: "/images/center-border.png",
+              container: "/images/center-container.png",
+              floating: "/images/center-floating.png",
+              shadow: "/images/center-shadow.png"
+            }}
+          />
+
             <WhyChooseUs />
             <ImageSection/>
             <PricingCard />

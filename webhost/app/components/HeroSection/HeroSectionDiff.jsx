@@ -1,0 +1,124 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { NavigationMenuDemo } from "../Header/MainNavbar";
+
+const HeroSectionDiff = ({
+  title,
+  description,
+
+  primaryButtonText,
+  primaryButtonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+
+  // Side Boxes Images (Left & Right)
+  leftSideBox = {
+    border,
+    container,
+    floating,
+    shadow,
+  },
+  rightSideBox = {
+    border,
+    container,
+    floating,
+    shadow,
+  },
+
+  // Center Box Images
+  centerBox = {
+    border,
+    container,
+    floating,
+    shadow,
+  },
+}) => {
+  return (
+    <section className="overflow-hidden h-[calc(100vh-85px)] relative">
+      {/* Background wrapper */}
+      <div className="text-white bg-[#090a59] pt-[85px] h-[90%] scale-110 rounded-b-full shadow-[0_10px_0_20px_rgba(200,206,222,1)] relative z-10 flex flex-col items-center">
+        {/* Navbar */}
+        <div className="absolute top-0 left-0 w-full z-50">
+          <NavigationMenuDemo />
+        </div>
+
+        {/* Text Content */}
+        <div className="flex flex-col items-center gap-4 mt-6 text-center">
+          <h1 className="text-[24px] md:text-[40px] font-semibold">
+            {title}
+          </h1>
+          <h2 className="font-light text-[14px] max-w-[80%] md:max-w-[614px] text-center">
+            {description}
+          </h2>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-center gap-4 mt-6 text-[14px]">
+          <Button
+            asChild
+            variant="outline"
+            className="border px-4 py-2 rounded-md hover:border-white hover:bg-transparent hover:text-grey-100 bg-transparent transition cursor-pointer"
+          >
+            <a href={primaryButtonLink}>{primaryButtonText}</a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="border px-4 py-2 rounded-md hover:border-white hover:bg-transparent hover:text-grey-100 bg-transparent transition cursor-pointer"
+          >
+            <a href={secondaryButtonLink}>{secondaryButtonText}</a>
+          </Button>
+        </div>
+
+        {/* Floating Illustration */}
+        <div className="relative -z-50 flex flex-col items-center justify-space-evenly mt-15 sm:mt-20 scale-50 sm:scale-80 md:mt-10 md:scale-90 lg:scale-100">
+          {/* Left and Right Side Boxes */}
+          <div className="flex justify-around w-full">
+            {/* Left Side Box */}
+            <div className="relative w-[266px] h-[154px] hidden sm:block">
+              <span className="absolute inset-0 w-full h-full">
+                <img src={leftSideBox.border} alt="border" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[176px] h-[137px]">
+                <img src={leftSideBox.container} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute -top-12 left-1/2 -translate-x-1/2 w-[70px] h-[70px] animate-float">
+                <img src={leftSideBox.floating} alt="box" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute top-15 -translate-y-full left-1/2 -translate-x-1/2 w-[110px] h-[212px]">
+                <img src={leftSideBox.shadow} alt="shadow" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+            </div>
+
+            {/* Right Side Box */}
+            <div className="relative w-[266px] h-[154px] hidden sm:block">
+              <span className="absolute inset-0 w-full h-full">
+                <img src={rightSideBox.border} alt="border" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[176px] h-[137px]">
+                <img src={rightSideBox.container} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute -top-12 left-1/2 -translate-x-1/2 w-[70px] h-[70px] animate-float">
+                <img src={rightSideBox.floating} alt="box" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute top-15 -translate-y-full left-1/2 -translate-x-1/2 w-[110px] h-[212px]">
+                <img src={rightSideBox.shadow} alt="shadow" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+            </div>
+          </div>
+
+          {/* Center Box */}
+          <div className="relative w-[452px] h-[262px] mx-48">
+            <img src={centerBox.border} alt="border" className="absolute inset-0 w-full h-full" />
+            <img src={centerBox.container} alt="container" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[317px] h-[250px]" />
+            <img src={centerBox.floating} alt="floating" className="absolute -top-15 left-1/2 -translate-x-1/2 w-[100px] h-[100px] animate-float" />
+            <img src={centerBox.shadow} alt="shadow" className="absolute top-17 -translate-y-full left-1/2 -translate-x-1/2 w-[131px] h-[386px]" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSectionDiff;
