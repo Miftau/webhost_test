@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroSection from '../components/HeroSection/HeroSection'
+import HeroSection from '../components/DistributorsProgram/HeroSection'
 import KubernetesSection from '../components/DistributorsProgram/KubernetesSection'
 import ArabicFeaturesSection from '../components/DistributorsProgram/ArabicFeaturesSection'
 import BackGroundSection from '../components/DistributorsProgram/BackGroundSection'
@@ -28,8 +28,7 @@ const DistributorsProgram = () => {
               }}
               centerBox={{
                 border: "/images/border-one.svg",
-                container: "/images/hero-windows-container.svg",
-                floating: "/images/hero-windows.svg",
+                container: "/images/dist-cont.svg",
                 shadow: "/images/lg-shadow.svg",
               }}
             />

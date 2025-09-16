@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSectionDiff from "../components/HeroSection/HeroSectionDiff";
+import HeroSectionVPS from "../components/HeroSection/HeroSectionVPS";
 import PricingSection from "../components/CloudServers/PricingSection";
 import FeaturesSection from "../components/CloudServers/FeaturesSection";
 import NISTFrameworkSection from "../components/CloudServers/NISTFrameworkSection";
@@ -13,7 +13,7 @@ import PartnersGrid from "../components/SharedHosting/PartnersGrid";
 const VPS = () => {
   return (
     <div className="overflow-x-hidden">
-     <HeroSectionDiff
+     <HeroSectionVPS
             title="Welcome to Our Platform"
             description="Discover amazing features designed to enhance your experience and boost productivity."
             primaryButtonText="Get Started"

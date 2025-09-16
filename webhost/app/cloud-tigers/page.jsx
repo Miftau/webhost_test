@@ -26,7 +26,7 @@ const CloudTigers = () => {
         centerBox={{
           border: "/images/border-one.svg",
           container: "/images/hero-windows-container.svg",
-          floating: "/images/hero-windows.svg",
+          floating: "/images/123456790.png",
           shadow: "/images/lg-shadow.svg",
         }}
       />

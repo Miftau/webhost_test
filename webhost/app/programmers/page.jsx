@@ -21,23 +21,14 @@ const Programmers = () => {
             secondaryButtonLink="/about"
             
             leftSideBox={{
-              border: "/images/left-border.png",
-              container: "/images/left-container.png",
-              floating: "/images/left-floating.png",
-              shadow: "/images/left-shadow.png"
+              leftimage: "/images/prog-left.svg",
             }}
             rightSideBox={{
-              border: "/images/right-border.png",
-              container: "/images/right-container.png",
-              floating: "/images/right-floating.png",
-              shadow: "/images/right-shadow.png"
+              rightimage: "/images/prog-right.svg",
             }}
             
             centerBox={{
-              border: "/images/center-border.png",
-              container: "/images/center-container.png",
-              floating: "/images/center-floating.png",
-              shadow: "/images/center-shadow.png"
+              centerimage: "/images/prog-center.svg",
             }}
           />
 

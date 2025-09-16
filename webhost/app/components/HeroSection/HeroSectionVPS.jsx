@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { NavigationMenuDemo } from "../Header/MainNavbar";
 
-const HeroSectionDiff = ({
+const HeroSectionVPS = ({
   title,
   description,
 
@@ -14,15 +14,24 @@ const HeroSectionDiff = ({
 
   // Side Boxes Images (Left & Right)
   leftSideBox = {
-    leftimage,
+    border: "",
+    container: "",
+    floating: "",
+    shadow: "",
   },
   rightSideBox = {
-    rightimage,
+    border: "",
+    container: "",
+    floating: "",
+    shadow: "",
   },
 
   // Center Box Images
   centerBox = {
-    centerimage,
+    border: "",
+    container: "",
+    floating: "",
+    shadow: "",
   },
 }) => {
   return (
@@ -68,22 +77,43 @@ const HeroSectionDiff = ({
           <div className="flex justify-around w-full">
             {/* Left Side Box */}
             <div className="relative w-[266px] h-[154px] hidden sm:block">
+              <span className="absolute inset-0 w-full h-full">
+                <img src={leftSideBox.border} alt="border" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
               <span className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[176px] h-[137px]">
-                <img src={leftSideBox.leftimage} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+                <img src={leftSideBox.container} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute -top-12 left-1/2 -translate-x-1/2 w-[70px] h-[70px] animate-float">
+                <img src={leftSideBox.floating} alt="box" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute top-15 -translate-y-full left-1/2 -translate-x-1/2 w-[110px] h-[212px]">
+                <img src={leftSideBox.shadow} alt="shadow" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
               </span>
             </div>
 
             {/* Right Side Box */}
             <div className="relative w-[266px] h-[154px] hidden sm:block">
+              <span className="absolute inset-0 w-full h-full">
+                <img src={rightSideBox.border} alt="border" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
               <span className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[176px] h-[137px]">
-                <img src={rightSideBox.rightimage} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+                <img src={rightSideBox.container} alt="container" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute -top-12 left-1/2 -translate-x-1/2 w-[70px] h-[70px] animate-float">
+                <img src={rightSideBox.floating} alt="box" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
+              </span>
+              <span className="absolute top-15 -translate-y-full left-1/2 -translate-x-1/2 w-[110px] h-[212px]">
+                <img src={rightSideBox.shadow} alt="shadow" className="absolute h-[100%] w-[100%] left-0 top-0 right-0 bottom-0 color-transparent" />
               </span>
             </div>
           </div>
 
           {/* Center Box */}
           <div className="relative w-[452px] h-[262px] mx-48">
-            <img src={centerBox.centerimage} alt="container" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[317px] h-[250px]" />
+            <img src={centerBox.border} alt="border" className="absolute inset-0 w-full h-full" />
+            <img src={centerBox.container} alt="container" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[317px] h-[250px]" />
+            <img src={centerBox.floating} alt="floating" className="absolute -top-15 left-1/2 -translate-x-1/2 w-[100px] h-[100px] animate-float" />
+            <img src={centerBox.shadow} alt="shadow" className="absolute top-17 -translate-y-full left-1/2 -translate-x-1/2 w-[131px] h-[386px]" />
           </div>
         </div>
       </div>
@@ -91,4 +121,4 @@ const HeroSectionDiff = ({
   );
 };
 
-export default HeroSectionDiff;
+export default HeroSectionVPS;
