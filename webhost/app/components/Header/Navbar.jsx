@@ -1,34 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Mail, Phone, Globe, LogIn, UserPlus, ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useTranslator } from "@/app/context/TranslatorContext"; // ✅ use context
+import GoogleTranslate from "../GoogleTranslate/GoogleTranslate";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { lang, translatePage } = useTranslator(); // ✅ take from provider
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
-  const languages = [
-    { value: "en", label: "English", flag: "/images/flag/England.png" },
-    { value: "tr", label: "Türkçe", flag: "/images/flag/turkey.png" },
-    { value: "ar", label: "العربية", flag: "/images/flag/saudi.png" },
-    { value: "it", label: "Italia", flag: "/images/flag/italy.png" },
-    { value: "de", label: "Deutsch", flag: "/images/flag/Germen.png" },
-    { value: "es", label: "Español", flag: "/images/flag/spain.png" },
-  ];
-
   return (
-    <header className="py-2 relative z-50 bg-white shadow-sm">
+    <header className="py-2 relative z-1000 bg-white shadow-sm">
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Left side */}
         <div className="hidden lg:flex items-center gap-4">
@@ -54,28 +37,10 @@ const Navbar = () => {
 
         {/* Right side */}
         <div className="hidden lg:flex items-center gap-6">
-          {/* Language Selector */}
+          {/* 🌍 Replace your custom Select with Google Translate */}
           <div className="flex items-center gap-2 cursor-pointer">
             <Globe className="w-4 h-4" />
-            <Select value={lang} onValueChange={translatePage}>
-              <SelectTrigger className="w-[140px] h-8 text-sm border-gray-200">
-                <SelectValue placeholder="Select Language" />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((language) => (
-                  <SelectItem key={language.value} value={language.value}>
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={language.flag}
-                        alt={language.label}
-                        className="rounded-sm w-5"
-                      />
-                      <span>{language.label}</span>
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <GoogleTranslate /> 
           </div>
 
           {/* Login & Register */}
@@ -101,3 +66,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

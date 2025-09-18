@@ -4,6 +4,7 @@ import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footer/Footer";
 import DisableRightClick from "./components/DisableRightClick";
 import { TranslatorProvider } from "./context/TranslatorContext";
+import GoogleTranslate from "./components/GoogleTranslate/GoogleTranslate";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"], // you can also add "arabic" if needed
