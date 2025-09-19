@@ -176,6 +176,6 @@ const Services = () => {
 
 export default Services;
 
-<div class="bg-gray-100 md:w-fit md:flex items-center gap-16 mx-auto mt-8 py-2 px-4 rounded-md font-medium">
-  <p>Design and development</p><p class="my-2 md:m-0">Ranges</p>
-  <p class="bg-white px-4 py-2 rounded-md">Cloud services</p></div>
+<div className="bg-gray-100 md:w-fit md:flex items-center gap-16 mx-auto mt-8 py-2 px-4 rounded-md font-medium">
+  <p>Design and development</p><p className="my-2 md:m-0">Ranges</p>
+  <p className="bg-white px-4 py-2 rounded-md">Cloud services</p></div>

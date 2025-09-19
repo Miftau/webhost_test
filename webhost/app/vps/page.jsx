@@ -14,7 +14,7 @@ const VPS = () => {
   return (
     <div className="overflow-x-hidden">
      <HeroSectionVPS
-            title="Welcome to Our Platform"
+            title="Vps Hosting"
             description="Discover amazing features designed to enhance your experience and boost productivity."
             primaryButtonText="Get Started"
             primaryButtonLink="/signup"
@@ -22,23 +22,24 @@ const VPS = () => {
             secondaryButtonLink="/about"
             
             leftSideBox={{
-              border: "/images/left-border.png",
-              container: "/images/left-container.png",
-              floating: "/images/left-floating.png",
-              shadow: "/images/left-shadow.png"
+              border: "/images/border-two.svg",
+              container: "/images/hero-box-container.svg",
+              floating: "/images/left-floating.svg",
+              shadow: "/images/sm-shadow.svg"
             }}
             rightSideBox={{
-              border: "/images/right-border.png",
-              container: "/images/right-container.png",
-              floating: "/images/right-floating.png",
-              shadow: "/images/right-shadow.png"
+              border: "/images/border-two.svg",
+              container: "/images/hero-box-container.svg",
+              floating: "/images/right-floating.svg",
+              shadow: "/images/sm-shadow.svg"
             }}
             
             centerBox={{
-              border: "/images/center-border.png",
-              container: "/images/center-container.png",
-              floating: "/images/center-floating.png",
-              shadow: "/images/center-shadow.png"
+              border: "/images/border-one.svg",
+              container: "/images/hero-windows-container.svg",
+              floating: "/images/center-floating.svg",
+              shadow: "/images/lg-shadow.svg"
+              
             }}
           />
 
